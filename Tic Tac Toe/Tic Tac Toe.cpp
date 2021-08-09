@@ -12,6 +12,8 @@ void instruction();
 	char nameTwo[30];     
 	char board[3][3];    
 	bool step;
+	bool Input();
+
 
 int main()
 {
