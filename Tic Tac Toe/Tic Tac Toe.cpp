@@ -1,6 +1,7 @@
 ﻿// Tic Tac Toe.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 #include <iostream>
+#include <conio.h>
 
 void instruction();
 
@@ -15,7 +16,7 @@ int main()
 	setlocale(LC_ALL, "Russian");
 
 	instruction();
-
+	system("cls");
 
 
 
@@ -33,19 +34,26 @@ int main()
 
 void instruction()
 {
-	std::cout << "\t\t\t\t\t\t*** Tic Tac Toe***\n\n";
+	std::cout << "\t\t\t\t\t\t*** Tic Tac Toe ***\n\n";
+	std::cout << "Правила:\n";
+	std::cout << "Играют 2 игрока на поле 3x3\n";
+	std::cout << "Побеждает тот кто составит выиграшную комбинацию из трех символов\n";
+	std::cout << std::endl;
+	int c = 0;
 
-	int l = 0;
-
-	for (int i(0); i < 3; i++)
+	for (int i = 0; i < 3; i++)
 	{
-		for (int j(0); j < 3; j++)
+		for (int j = 0; j < 3; j++)
 		{
-			std::cout << "| " << l + 1 << ' ';
-			board[i][j] = char(49 + l);
-			l++;
+			std::cout << "|"<<'_' << c + 1 << '_';
+			board[i][j] = char(49 + c);
+			c++;
 		}
 		std::cout << '|';
 		std::cout << std::endl;
 	}
+	std::cout << "\nДля хода нажмите цифру ячейки поля\n";
+	std::cout << "Для начала игры нажмите клавишу:";
+	_getch();
+
 }
