@@ -13,6 +13,7 @@ void instruction();
 	char board[3][3];    
 	bool step;
 	bool Input();
+	bool victory();
 
 
 int main()
@@ -26,16 +27,37 @@ int main()
 	std::cin.getline(nameOne, 30);
 	std::cout << "Введите имя 2 игрока: ";
 	std::cin.getline(nameTwo, 30);
-//случайным образом выьираем кто ходит первым
+//случайным образом выбираем кто ходит первым
 	srand(time(NULL));
 	if (rand() & 1)    //битовое умножение на 1(деление с остатком на 2)
 		step = true;
 	else step = false;
 
+	while (!victory())
+	{
+		if (i == 9)
+		{
+			std::cout << "Ничья!";
+			_getch();
+			return -1;
+		}
+		system("cls");
+		if (!Input())
+		{
+			std::cout << "Вы ввели неверные данные повторите!";
+			_getch();
+		}
+		i++;
+	}
+
+	system("cls");
+	if (step)
+		std::cout << "Победил " << nameTwo << std::endl;
+	else std::cout << "Победил " << nameOne << std::endl;
 
 
-
-
+	_getch();
+	return 0;
 
 
 }
@@ -65,6 +87,7 @@ void instruction()
 	std::cout << "\nДля хода нажмите цифру ячейки поля\n";
 	std::cout << "Для начала игры нажмите клавишу:";
 	_getch();
+	return;
 }
 
 bool Input()
@@ -113,4 +136,21 @@ bool Input()
 	}
 	else { board[i][j] = 'O'; step = true; }
 	return true;
+}
+
+bool victory()
+{
+	for (int i(0); i < 3; i++)
+		if ((board[i][0] == board[i][1]) && (board[i][0] == board[i][2]))  //проверка по горизонтали
+			return true;
+
+		else
+			if ((board[0][i] == board[1][i]) && (board[0][i] == board[2][i]))  //проверка по вертикали
+				return true;
+
+			else if ((board[0][0] == board[1][1] && board[0][0] == board[2][2]) || (board[0][2] == board[1][1] && board[0][2] == board[2][0])) //проверка по диагонали
+				return true;
+
+
+	return false;
 }
